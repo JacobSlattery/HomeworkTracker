@@ -64,6 +64,7 @@
             this.radioButtonLow.Name = "radioButtonLow";
             this.radioButtonLow.Size = new System.Drawing.Size(54, 21);
             this.radioButtonLow.TabIndex = 2;
+            this.radioButtonLow.Tag = "\"Low\"";
             this.radioButtonLow.Text = "Low";
             this.radioButtonLow.UseVisualStyleBackColor = true;
             // 
@@ -76,6 +77,7 @@
             this.radioButtonMedium.Size = new System.Drawing.Size(78, 21);
             this.radioButtonMedium.TabIndex = 1;
             this.radioButtonMedium.TabStop = true;
+            this.radioButtonMedium.Tag = "\"Medium\"";
             this.radioButtonMedium.Text = "Medium";
             this.radioButtonMedium.UseVisualStyleBackColor = true;
             // 
@@ -86,6 +88,7 @@
             this.radioButtonHigh.Name = "radioButtonHigh";
             this.radioButtonHigh.Size = new System.Drawing.Size(58, 21);
             this.radioButtonHigh.TabIndex = 0;
+            this.radioButtonHigh.Tag = "\"High\"";
             this.radioButtonHigh.Text = "High";
             this.radioButtonHigh.UseVisualStyleBackColor = true;
             // 
@@ -134,14 +137,14 @@
             // checkAllToolStripMenuItem
             // 
             this.checkAllToolStripMenuItem.Name = "checkAllToolStripMenuItem";
-            this.checkAllToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.checkAllToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.checkAllToolStripMenuItem.Text = "Check All";
             this.checkAllToolStripMenuItem.Click += new System.EventHandler(this.checkAllToolStripMenuItem_Click);
             // 
             // uncheckAllToolStripMenuItem
             // 
             this.uncheckAllToolStripMenuItem.Name = "uncheckAllToolStripMenuItem";
-            this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.uncheckAllToolStripMenuItem.Text = "Uncheck All";
             this.uncheckAllToolStripMenuItem.Click += new System.EventHandler(this.uncheckAllToolStripMenuItem_Click);
             // 

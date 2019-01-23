@@ -13,9 +13,25 @@ namespace TrackerControlLibrary
 {
     public partial class UserControl1: UserControl
     {
+        private bool high;
+        public bool High
+        {
+            get => this.high;
+            set
+            {
+                this.high = value;
+            }
+        }
+
+        public enum Priority {Low, Medium, High}
+
         public UserControl1()
         {
             InitializeComponent();
+            this.radioButtonHigh.Checked = this.High;
+            var checkedPriority = Controls.OfType<RadioButton>().First(n => n.Checked);
+            Debug.Write(checkedPriority.Tag);
+
         }
 
         private void mouseDown(object sender, MouseEventArgs e)
@@ -32,7 +48,7 @@ namespace TrackerControlLibrary
             foreach (DataGridViewRow row in this.dataGridView1.Rows)
             {
                 var cell = (DataGridViewCheckBoxCell)row.Cells[0];
-                if (cell.Value  == cell.TrueValue)
+                if (cell.Value  == cell.TrueValue || cell.Value == null)
                 {
                     cell.Value = cell.FalseValue;
                 }
@@ -44,7 +60,7 @@ namespace TrackerControlLibrary
             foreach (DataGridViewRow row in this.dataGridView1.Rows)
             {
                 var cell = (DataGridViewCheckBoxCell)row.Cells[0];
-                if (cell.Value  == cell.FalseValue)
+                if (cell.Value  == cell.FalseValue || cell.Value == null)
                 {
                     cell.Value = cell.TrueValue;
                 }
