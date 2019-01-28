@@ -55,7 +55,7 @@
             this.PriorityGroupBox.TabIndex = 0;
             this.PriorityGroupBox.TabStop = false;
             this.PriorityGroupBox.Tag = "PriorityTag";
-            this.PriorityGroupBox.Text = "PriorityLevel";
+            this.PriorityGroupBox.Text = "Priority";
             // 
             // radioButtonLow
             // 

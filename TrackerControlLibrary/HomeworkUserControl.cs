@@ -1,34 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace TrackerControlLibrary
 {
+    /// <inheritdoc />
+    /// <summary>
+    ///     UserControl which holds a priority box and a data grid of complete and incomplete tasks.
+    /// </summary>
+    /// <seealso cref="T:System.Windows.Forms.UserControl" />
     public partial class HomeworkUserControl : UserControl
     {
         #region Types and Delegates
 
-
-        public List<string> IncompleteTasks
-        {
-            get
-            {
-                var list = new List<string>();
-                for (var i = 0; i < this.DataGridView.Rows.Count - 1; i++)
-                {
-                    var textCell = (DataGridViewTextBoxCell)this.DataGridView.Rows[i].Cells[1];
-                    var checkCell = (DataGridViewCheckBoxCell)this.DataGridView.Rows[i].Cells[0];
-                    if (textCell.Value != null && checkCell.Value != checkCell.TrueValue)
-                    {
-                        list.Add(textCell.Value.ToString());
-                    }
-                }
-
-                return list;
-            }
-        }
+        /// <summary>
+        ///     The Priority Levels.
+        /// </summary>
         public enum PriorityLevel
         {
             Low = 0,
@@ -36,23 +24,31 @@ namespace TrackerControlLibrary
             High = 2
         }
 
+        /// <summary>
+        ///     The delegate for when visual data has changed.
+        /// </summary>
         public delegate void DataChangedHandler();
-
-        #endregion
-
-        #region Data members
-
 
         #endregion
 
         #region Properties
 
-        public int Priority => (int)this.PriorityGroupBox.Controls.OfType<RadioButton>().First(x => x.Checked).Tag;
+        /// <summary>
+        ///     Gets the priority.
+        /// </summary>
+        /// <value>
+        ///     The priority.
+        /// </value>
+        public int Priority => (int) this.PriorityGroupBox.Controls.OfType<RadioButton>().First(x => x.Checked).Tag;
 
         #endregion
 
         #region Constructors
 
+        /// <inheritdoc />
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="T:TrackerControlLibrary.HomeworkUserControl" /> class.
+        /// </summary>
         public HomeworkUserControl()
         {
             this.InitializeComponent();
@@ -72,35 +68,48 @@ namespace TrackerControlLibrary
 
         public event DataChangedHandler DataChanged;
 
-        public string GetUnfinishedTasks()
+        /// <summary>
+        ///     Gets the incomplete tasks.
+        /// </summary>
+        /// <returns>
+        ///     A list of tasks as strings.
+        /// </returns>
+        public List<string> GetIncompleteTasks()
         {
-            var stringBuilder = new StringBuilder();
+            var list = new List<string>();
             for (var i = 0; i < this.DataGridView.Rows.Count - 1; i++)
             {
-                var textCell = (DataGridViewTextBoxCell) this.DataGridView.Rows[i].Cells[1];
-                var checkCell = (DataGridViewCheckBoxCell) this.DataGridView.Rows[i].Cells[0];
+                var textCell = (DataGridViewTextBoxCell)this.DataGridView.Rows[i].Cells[1];
+                var checkCell = (DataGridViewCheckBoxCell)this.DataGridView.Rows[i].Cells[0];
                 if (textCell.Value != null && checkCell.Value != checkCell.TrueValue)
                 {
-                    stringBuilder.AppendLine(textCell.Value.ToString());
+                    list.Add(textCell.Value.ToString());
                 }
             }
 
-            return stringBuilder.ToString();
+            return list;
         }
 
-        public void AddRow(string task)
+        /// <summary>
+        ///     Adds an incomplete task as a new row.
+        /// </summary>
+        /// <param name="task">The task.</param>
+        public void AddIncompleteTask(string task)
         {
             this.DataGridView.Rows.Add(false, task);
         }
 
+        /// <summary>
+        ///     Clears the rows of all tasks.
+        /// </summary>
         public void ClearRows()
         {
+            Select();
             this.DataGridView.Rows.Clear();
         }
 
         private void onDataChanged()
         {
-            var updatedData = this.GetUnfinishedTasks();
             this.DataChanged?.Invoke();
         }
 
@@ -155,7 +164,6 @@ namespace TrackerControlLibrary
             {
                 this.onDataChanged();
             }
-            
         }
 
         private void DataGridView_SelectionChanged(object sender, EventArgs e)

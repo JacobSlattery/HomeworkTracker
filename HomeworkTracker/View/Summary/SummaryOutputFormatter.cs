@@ -2,21 +2,31 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrackerControlLibrary;
 
-namespace HomeworkTracker.View
+namespace HomeworkTracker.View.Summary
 {
-    class SummaryOutputFormatter
+    /// <summary>
+    ///     Formats the output summary page from the TabControl
+    /// </summary>
+    internal class SummaryOutputFormatter
     {
+        #region Data members
 
         private StringBuilder stringBuilder;
         private readonly ICollection<HomeworkUserControl> userControlCollection;
         private readonly TabControl tabControl;
 
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="SummaryOutputFormatter"/> class.
+        /// </summary>
+        /// <param name="tabControl">The tab control.</param>
         public SummaryOutputFormatter(TabControl tabControl)
         {
             this.tabControl = tabControl;
@@ -24,15 +34,25 @@ namespace HomeworkTracker.View
             this.userControlCollection = this.getHomeworkTrackerControls();
         }
 
+        #endregion
 
+        #region Methods
+
+        /// <summary>
+        ///     Builds the summary for the TabControl by organizing based on priority level.
+        /// </summary>
+        /// <returns>
+        ///     The summary
+        /// </returns>
         public string BuildSummary()
         {
-            var values = Enum.GetValues(typeof(HomeworkUserControl.PriorityLevel)).Cast<int>().Reverse();
+            var priorityLevels = Enum.GetValues(typeof(HomeworkUserControl.PriorityLevel)).Cast<int>().Reverse();
             this.stringBuilder = new StringBuilder();
-            foreach (var value in values)
+            foreach (var value in priorityLevels)
             {
                 this.formatSummaryForOnePriorityLevel(value);
             }
+
             return this.stringBuilder.ToString();
         }
 
@@ -67,7 +87,16 @@ namespace HomeworkTracker.View
             builder.Append("------------------------" + Environment.NewLine);
         }
 
+        private static string formatIncompleteTasks(IEnumerable<string> list)
+        {
+            var stringBuilder = new StringBuilder();
+            foreach (var task in list)
+            {
+                stringBuilder.AppendLine(task);
+            }
 
+            return stringBuilder.ToString();
+        }
 
         private void formatSummaryForOnePriorityLevel(int priorityLevel)
         {
@@ -75,38 +104,49 @@ namespace HomeworkTracker.View
             if (controls.Any())
             {
                 var taskBuilder = new StringBuilder();
-                foreach (var current in controls)
-                {
-                    var className = this.GetNameFor(current);
-                    var unfinishedTasks = current.GetUnfinishedTasks();
-                    if (unfinishedTasks.Length > 0)
-                    {
-                        taskBuilder.Append($"Class: {className}" + Environment.NewLine);
-                        taskBuilder.Append(unfinishedTasks);
-                        taskBuilder.AppendLine();
-                    }
-                }
+                this.buildSingleClassPotentialReport(controls, taskBuilder);
+                this.finalizeReportIfNotEmpty(priorityLevel, taskBuilder);
+            }
+        }
 
-                if (taskBuilder.Length > 0)
+        private void buildSingleClassPotentialReport(IEnumerable<HomeworkUserControl> controls, StringBuilder taskBuilder)
+        {
+            foreach (var current in controls)
+            {
+                var className = this.GetNameFor(current);
+                var unfinishedTasks = formatIncompleteTasks(current.GetIncompleteTasks());
+                if (unfinishedTasks.Length > 0)
                 {
-                    string priority;
-                    switch (priorityLevel)
-                    {
-                        case (int)HomeworkUserControl.PriorityLevel.High:
-                            priority = "High";
-                            break;
-                        case (int)HomeworkUserControl.PriorityLevel.Medium:
-                            priority = "Medium";
-                            break;
-                        default:
-                            priority = "Low";
-                            break;
-                    }
-                    addHeader(this.stringBuilder, priority);
-                    this.stringBuilder.Append(taskBuilder);
+                    taskBuilder.Append($"Class: {className}" + Environment.NewLine);
+                    taskBuilder.Append(unfinishedTasks);
+                    taskBuilder.AppendLine();
                 }
             }
         }
 
+        private void finalizeReportIfNotEmpty(int priorityLevel, StringBuilder taskBuilder)
+        {
+            if (taskBuilder.Length > 0)
+            {
+                string priority;
+                switch (priorityLevel)
+                {
+                    case (int) HomeworkUserControl.PriorityLevel.High:
+                        priority = "High";
+                        break;
+                    case (int) HomeworkUserControl.PriorityLevel.Medium:
+                        priority = "Medium";
+                        break;
+                    default:
+                        priority = "Low";
+                        break;
+                }
+
+                addHeader(this.stringBuilder, priority);
+                this.stringBuilder.Append(taskBuilder);
+            }
+        }
+
+        #endregion
     }
 }
