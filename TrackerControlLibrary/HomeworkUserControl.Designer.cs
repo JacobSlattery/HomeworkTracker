@@ -1,6 +1,6 @@
 ﻿namespace TrackerControlLibrary
 {
-    partial class UserControl1
+    partial class HomeworkUserControl
     {
         /// <summary>
         /// Required designer variable.
@@ -33,14 +33,14 @@
             this.radioButtonLow = new System.Windows.Forms.RadioButton();
             this.radioButtonMedium = new System.Windows.Forms.RadioButton();
             this.radioButtonHigh = new System.Windows.Forms.RadioButton();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.DataGridView = new System.Windows.Forms.DataGridView();
             this.CheckboxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.TaskColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.checkAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uncheckAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PriorityGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.GridContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +55,7 @@
             this.PriorityGroupBox.TabIndex = 0;
             this.PriorityGroupBox.TabStop = false;
             this.PriorityGroupBox.Tag = "PriorityTag";
-            this.PriorityGroupBox.Text = "Priority";
+            this.PriorityGroupBox.Text = "PriorityLevel";
             // 
             // radioButtonLow
             // 
@@ -67,6 +67,7 @@
             this.radioButtonLow.Tag = "\"Low\"";
             this.radioButtonLow.Text = "Low";
             this.radioButtonLow.UseVisualStyleBackColor = true;
+            this.radioButtonLow.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // radioButtonMedium
             // 
@@ -80,6 +81,7 @@
             this.radioButtonMedium.Tag = "\"Medium\"";
             this.radioButtonMedium.Text = "Medium";
             this.radioButtonMedium.UseVisualStyleBackColor = true;
+            this.radioButtonMedium.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // radioButtonHigh
             // 
@@ -88,25 +90,29 @@
             this.radioButtonHigh.Name = "radioButtonHigh";
             this.radioButtonHigh.Size = new System.Drawing.Size(58, 21);
             this.radioButtonHigh.TabIndex = 0;
-            this.radioButtonHigh.Tag = "\"High\"";
+            this.radioButtonHigh.Tag = "";
             this.radioButtonHigh.Text = "High";
             this.radioButtonHigh.UseVisualStyleBackColor = true;
+            this.radioButtonHigh.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // dataGridView1
+            // DataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CheckboxColumn,
             this.TaskColumn});
-            this.dataGridView1.ContextMenuStrip = this.GridContextMenuStrip;
-            this.dataGridView1.Location = new System.Drawing.Point(116, 6);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(545, 293);
-            this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.Tag = "";
-            this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseDown);
+            this.DataGridView.ContextMenuStrip = this.GridContextMenuStrip;
+            this.DataGridView.Location = new System.Drawing.Point(116, 6);
+            this.DataGridView.Name = "DataGridView";
+            this.DataGridView.RowHeadersVisible = false;
+            this.DataGridView.RowTemplate.Height = 24;
+            this.DataGridView.Size = new System.Drawing.Size(545, 339);
+            this.DataGridView.TabIndex = 1;
+            this.DataGridView.Tag = "";
+            this.DataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
+            this.DataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellEndEdit);
+            this.DataGridView.SelectionChanged += new System.EventHandler(this.DataGridView_SelectionChanged);
+            this.DataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseDown);
             // 
             // CheckboxColumn
             // 
@@ -148,17 +154,17 @@
             this.uncheckAllToolStripMenuItem.Text = "Uncheck All";
             this.uncheckAllToolStripMenuItem.Click += new System.EventHandler(this.uncheckAllToolStripMenuItem_Click);
             // 
-            // UserControl1
+            // HomeworkUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.DataGridView);
             this.Controls.Add(this.PriorityGroupBox);
-            this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(668, 305);
+            this.Name = "HomeworkUserControl";
+            this.Size = new System.Drawing.Size(666, 348);
             this.PriorityGroupBox.ResumeLayout(false);
             this.PriorityGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             this.GridContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -170,7 +176,7 @@
         private System.Windows.Forms.RadioButton radioButtonLow;
         private System.Windows.Forms.RadioButton radioButtonMedium;
         private System.Windows.Forms.RadioButton radioButtonHigh;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView DataGridView;
         private System.Windows.Forms.DataGridViewCheckBoxColumn CheckboxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaskColumn;
         private System.Windows.Forms.ContextMenuStrip GridContextMenuStrip;
