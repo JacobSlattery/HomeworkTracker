@@ -96,7 +96,7 @@ namespace TrackerControlLibrary
         /// <param name="task">The task.</param>
         public void AddIncompleteTask(string task)
         {
-            this.DataGridView.Rows.Add(false, task);
+            this.DataGridView.Rows.Add(null, task);
         }
 
         /// <summary>
@@ -132,6 +132,7 @@ namespace TrackerControlLibrary
                     cell.Value = cell.FalseValue;
                 }
             }
+            this.onDataChanged();
         }
 
         private void checkAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -144,6 +145,7 @@ namespace TrackerControlLibrary
                     cell.Value = cell.TrueValue;
                 }
             }
+            this.onDataChanged();
         }
 
         private void removeAnyEmptyCells()

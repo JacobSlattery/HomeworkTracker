@@ -34,11 +34,11 @@
             this.radioButtonMedium = new System.Windows.Forms.RadioButton();
             this.radioButtonHigh = new System.Windows.Forms.RadioButton();
             this.DataGridView = new System.Windows.Forms.DataGridView();
-            this.CheckboxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.TaskColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.checkAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uncheckAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CheckboxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.TaskColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PriorityGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.GridContextMenuStrip.SuspendLayout();
@@ -114,23 +114,6 @@
             this.DataGridView.SelectionChanged += new System.EventHandler(this.DataGridView_SelectionChanged);
             this.DataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseDown);
             // 
-            // CheckboxColumn
-            // 
-            this.CheckboxColumn.FalseValue = "False";
-            this.CheckboxColumn.FillWeight = 50F;
-            this.CheckboxColumn.HeaderText = "Done";
-            this.CheckboxColumn.IndeterminateValue = "False";
-            this.CheckboxColumn.MinimumWidth = 30;
-            this.CheckboxColumn.Name = "CheckboxColumn";
-            this.CheckboxColumn.TrueValue = "True";
-            this.CheckboxColumn.Width = 50;
-            // 
-            // TaskColumn
-            // 
-            this.TaskColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TaskColumn.HeaderText = "Task";
-            this.TaskColumn.Name = "TaskColumn";
-            // 
             // GridContextMenuStrip
             // 
             this.GridContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -153,6 +136,23 @@
             this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.uncheckAllToolStripMenuItem.Text = "Uncheck All";
             this.uncheckAllToolStripMenuItem.Click += new System.EventHandler(this.uncheckAllToolStripMenuItem_Click);
+            // 
+            // CheckboxColumn
+            // 
+            this.CheckboxColumn.FalseValue = "false";
+            this.CheckboxColumn.FillWeight = 50F;
+            this.CheckboxColumn.HeaderText = "Done";
+            this.CheckboxColumn.IndeterminateValue = "false";
+            this.CheckboxColumn.MinimumWidth = 30;
+            this.CheckboxColumn.Name = "CheckboxColumn";
+            this.CheckboxColumn.TrueValue = "true";
+            this.CheckboxColumn.Width = 50;
+            // 
+            // TaskColumn
+            // 
+            this.TaskColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TaskColumn.HeaderText = "Task";
+            this.TaskColumn.Name = "TaskColumn";
             // 
             // HomeworkUserControl
             // 
@@ -177,10 +177,10 @@
         private System.Windows.Forms.RadioButton radioButtonMedium;
         private System.Windows.Forms.RadioButton radioButtonHigh;
         private System.Windows.Forms.DataGridView DataGridView;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn CheckboxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TaskColumn;
         private System.Windows.Forms.ContextMenuStrip GridContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem checkAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uncheckAllToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn CheckboxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TaskColumn;
     }
 }
